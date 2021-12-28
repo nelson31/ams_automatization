@@ -33,5 +33,9 @@
         name: "sebp/elk"
         source: pull
         
-    
+    - name: Create container
+      docker_container:
+        name: home_elk_1
+        image: "sebp/elk"
+        state: present
     
