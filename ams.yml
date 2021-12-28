@@ -29,8 +29,8 @@
         name: docker
         
     - name: Install docker-compose
-        apt:
-            name: docker-compose
+      apt:
+        name: docker-compose
       
     - name: Pull docker image
       docker_image:
