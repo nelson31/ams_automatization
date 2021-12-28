@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+        elk:
+                image: sebp/elk
+                ports:
+                        - "5601:5601"
+                        - "9200:9200"
+                        - "5044:5044"
+
+        prometheus:
+                image: prom/prometheus:latest
+                command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+                ports:
+                        - "9090:9090"
+                volumes:
+                        - ./prometheus:/etc/prometheus
+                        - prometheus-data:/prometheus
+                networks:
+                        - prometheus-grafana
+
+        grafana:
+                image: grafana/grafana-oss:latest
+                ports:
+                        - "3000:3000"
+                user: '104'
+                networks:
+                        - prometheus-grafana
+
+        alertmanager:
+                image: prom/alertmanager:latest
+                restart: unless-stopped
+                command: --config.file=/config/alertmanager.yml --log.level=debug
+                ports:
+                        - "9093:9093"
+                volumes:
+                        - ./alertmanager:/config
+                        - alertmanager-data:/data
+                networks:
+                        - prometheus-grafana
+
+
+volumes:
+        prometheus-data:
+        alertmanager-data:
+
+networks:
+        prometheus-grafana:
+                driver: bridge
