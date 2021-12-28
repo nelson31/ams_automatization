@@ -37,6 +37,9 @@
         name: "sebp/elk"
         source: pull
         
+    - name: Change VM.max_map_count
+      command: sudo sysctl -w vm.max_map_count=262144
+        
     - name: Copy docker-compose file
       copy:
         src: './templates/docker-compose.yml'
