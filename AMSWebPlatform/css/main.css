@@ -1,0 +1,175 @@
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.background {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,1);
+  
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  overflow: hidden;
+}
+
+.circle {
+  align-self: flex-end;
+  width: 70vw;
+  height: 70vw;
+  margin-bottom: -35vw;
+  background: rgba(195,36,213,1);
+  
+  border-radius: 100%;
+}
+.top_left {
+  color: white;
+  display: flex;
+  width: 43%;
+  height: 22%;
+  background: rgba(54,54,54,1);
+  position: absolute;
+  top: 35%;
+  left: 3%;
+  
+  background: linear-gradient(to left, rgba(54,54,54,1) 50%, gray 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+}
+
+.top_left:hover{
+  background-position: left;
+}
+
+.bottom_left {
+  color: white;
+  display: flex;
+  width: 43%;
+  height: 22%;
+  background: rgba(54,54,54,1);
+  position: absolute;
+  top: 65%;
+  left: 3%;
+
+  background: linear-gradient(to left, rgba(54,54,54,1) 50%, gray 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+}
+
+.bottom_left:hover {
+  background-position: left;
+}
+
+.bottom_right {
+  color: white;
+  display: flex;
+  width: 43%;
+  height: 22%;
+  background: rgba(54,54,54,1);
+  position: absolute;
+  top: 65%;
+  right: 3%;
+
+  background: linear-gradient(to left, rgba(54,54,54,1) 50%, gray 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+}
+
+.bottom_right:hover {
+  background-position: left;
+}
+
+.top_right {
+  color: white;
+  display: flex;
+  width: 43%;
+  height: 22%;
+  background: rgba(54,54,54,1);
+  position: absolute;
+  top: 35%;
+  right: 3%;
+
+  background: linear-gradient(to left, rgba(54,54,54,1) 50%, gray 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+}
+
+.top_right:hover {
+  background-position: left;
+}
+
+.top_text{
+  color: inherit;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: Bold;
+  font-size: 300%;
+}
+
+.bottom_text{
+  color: inherit;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: Regular;
+  font-size: 150%;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 25%;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  margin-left: 50px;
+}
+
+.c_img {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.accenture {
+  width: auto;
+  height: 8%;
+  position: absolute;
+  top: 5%;
+  left: 3%;
+}
+
+.burger1 {
+  width: 5%;
+  height: 1.5%;
+  background: rgba(195,36,213,1);
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
+.burger2 {
+  width: 5%;
+  height: 1.5%;
+  background: rgba(195,36,213,1);
+  position: absolute;
+  top: 8.25%;
+  right: 3%;
+}
+
+.burger3 {
+  width: 5%;
+  height: 1.5%;
+  background: rgba(195,36,213,1);
+  position: absolute;
+  top: 11.5%;
+  right: 3%;
+}
