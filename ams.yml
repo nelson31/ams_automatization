@@ -45,7 +45,7 @@
         
     - name: build container with docker-compose
       community.docker.docker_compose:
-        project_src: "/home/docker-compose.yml"
+        project_src: "/home/"
       register: options
     
     
