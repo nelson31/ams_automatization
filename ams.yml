@@ -27,15 +27,25 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
+        
+    - name: Install docker-compose
+        apt:
+            name: docker-compose
       
     - name: Pull docker image
       docker_image:
         name: "sebp/elk"
         source: pull
         
-    - name: Create container
-      docker_container:
-        name: home_elk_1
-        image: "sebp/elk"
-        state: present
+    - name: Copy docker-compose file
+      copy:
+        src: './templates/docker-compose.yml'
+        dest: '/home/'
+        mode: 0600
+        
+    - name: build container with docker-compose
+      docker-compose:
+        project_src: "/home/docker-compose.yml"
+      register: options
+    
     
