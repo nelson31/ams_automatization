@@ -44,7 +44,7 @@
         mode: 0600
         
     - name: build container with docker-compose
-      docker-compose:
+      community.docker.docker_compose:
         project_src: "/home/docker-compose.yml"
       register: options
     
