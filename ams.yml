@@ -43,6 +43,18 @@
         dest: '/home/'
         mode: 0600
         
+    - name: Copy alertmanager config file
+      copy:
+        src: './templates/alertmanager/'
+        dest: '/home/alertmanager/'
+        mode: 0600
+        
+    - name: Copy prometheus config file
+      copy:
+        src: './templates/prometheus/'
+        dest: '/home/prometheus/'
+        mode: 0600
+        
     - name: build container with docker-compose
       community.docker.docker_compose:
         project_src: "/home/"
