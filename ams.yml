@@ -114,3 +114,4 @@
      # Iniciar a plataforma web com o mini-httpd
      - name: Inicialize Web platform
        command: sudo mini_httpd -p 80 -d /home/AMSWebPlatform
+       
