@@ -52,6 +52,12 @@
         src: './templates/prometheus/'
         dest: '/home/prometheus/'
         mode: 0666
+    
+    - name: Copy ELK config files
+      copy:
+        src: './templates/configs/'
+        dest: '/home/configs/'
+        mode: 0666
         
     - name: build container with docker-compose
       community.docker.docker_compose:
