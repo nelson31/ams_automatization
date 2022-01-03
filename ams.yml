@@ -99,19 +99,16 @@
         container: home_elk_1
         command: service kibana restart
    
-   # Instalar mini-httpd
-     - name: Install mini-httpd
-       apt:
+    - name: Install mini-httpd
+      apt:
         name: mini-httpd
 
-     # Copiar a pasta da plataforma Web para a VM
-     - name: Copy Web platform files
-       copy:
+    - name: Copy Web platform files
+      copy:
         src: './AMSWebPlatform/'
         dest: '/home/AMSWebPlatform/'
         mode: 0666
 
-     # Iniciar a plataforma web com o mini-httpd
-     - name: Inicialize Web platform
-       command: sudo mini_httpd -p 80 -d /home/AMSWebPlatform
+    - name: Inicialize Web platform
+      command: sudo mini_httpd -p 80 -d /home/AMSWebPlatform
        
