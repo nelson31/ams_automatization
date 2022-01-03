@@ -39,19 +39,19 @@
       copy:
         src: './templates/docker-compose.yml'
         dest: '/home/'
-        mode: 0600
+        mode: 0666
         
     - name: Copy alertmanager config file
       copy:
         src: './templates/alertmanager/'
         dest: '/home/alertmanager/'
-        mode: 0600
+        mode: 0666
         
     - name: Copy prometheus config file
       copy:
         src: './templates/prometheus/'
         dest: '/home/prometheus/'
-        mode: 0600
+        mode: 0666
         
     - name: build container with docker-compose
       community.docker.docker_compose:
