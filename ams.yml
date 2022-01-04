@@ -74,9 +74,7 @@
         command: chown elasticsearch:elasticsearch /etc/elasticsearch/elasticsearch.keystore
       
     - name: change elastic bootstrap password
-      community.docker.docker_container_exec:
-        container: home_elk_1
-        command: /bin/bash echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x
+      command: docker exec -it home_elk_1 bash -c 'echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x'
         
     - name: restart elasticsearch
       community.docker.docker_container_exec:
