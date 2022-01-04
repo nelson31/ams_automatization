@@ -72,7 +72,7 @@
     - name: change elastic bootstrap password
       community.docker.docker_container_exec:
         container: home_elk_1
-        command: echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore "bootstrap.password" -x
+        command: echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x
         
     - name: restart elasticsearch
       community.docker.docker_container_exec:
