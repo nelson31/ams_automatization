@@ -79,6 +79,11 @@
         container: home_elk_1
         command: service elasticsearch restart
         
+    - name: wait for elastisearch to be up
+      wait_for_connection:
+        delay: 5
+        sleep: 1
+        
     - name: change elastic user password
       community.docker.docker_container_exec:
         container: home_elk_1
