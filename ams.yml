@@ -90,7 +90,7 @@
       command: docker exec -it home_elk_1 bash -c 'curl -uelastic:"123456789" -XPUT -H "Content-Type{{ ":" }} application/json" "http://localhost:9200/_xpack/security/user/elastic/_password" -d "{ "password":"123456789" }"'
         
     - name: change kibana_system user password
-      command: docker exec -it home_elk_1 bash -c 'curl -uelastic:"123456789" -XPUT -H "Content-Type: application/json" "http://localhost:9200/_xpack/security/user/kibana_system/_password" -d "{ "password":"123456789" }"'
+      command: docker exec -it home_elk_1 bash -c 'curl -uelastic:"123456789" -XPUT -H "Content-Type{{ ":" }} application/json" "http://localhost:9200/_xpack/security/user/kibana_system/_password" -d "{ "password":"123456789" }"'
     
     - name: restart elasticsearch
       community.docker.docker_container_exec:
