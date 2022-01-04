@@ -65,8 +65,8 @@
       register: options
       
     - name: Sleep for 10 seconds
-        wait_for:
-          timeout: 10
+      wait_for:
+        timeout: 10
       
     - name: Change ownership of elasticsearch.keystore
       community.docker.docker_container_exec:
