@@ -71,7 +71,7 @@
     - name: Change ownership of elasticsearch.keystore
       community.docker.docker_container_exec:
         container: home_elk_1
-        command: chown elasticsearch:elasticsearch /etc/elasticsearch/elasticsearch.keystore
+        command: chmod a+wr /etc/elasticsearch/elasticsearch.keystore
       
     - name: change elastic bootstrap password
       command: docker exec -it home_elk_1 bash -c 'echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x'
