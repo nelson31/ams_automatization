@@ -92,7 +92,7 @@
         argv:
           - docker
           - exec
-          - it
+          - -it
           - home_elk_1
           - bash
           - -c 
@@ -103,7 +103,7 @@
         argv:
           - docker
           - exec
-          - it
+          - -it
           - home_elk_1
           - bash
           - -c 
