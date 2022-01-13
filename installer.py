@@ -325,8 +325,7 @@ def main():
     #----------------------------Write hosts file-------------------------------------------------
 
     hosts_file = open("/etc/ansible/hosts", "w")
-
-    hosts_file.write(installer_configs['hosts'])
+    hosts_file.write(installer_configs['hosts'] + "\n")
 
     
     #----------------------------Run ansible-------------------------------------------------------
