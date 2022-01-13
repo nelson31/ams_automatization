@@ -330,7 +330,8 @@ def main():
     
     #----------------------------Run ansible-------------------------------------------------------
     #subprocess.run(["ansible-playbook", "./ams.yml", "-i", "/etc/ansible/hosts"])
-    os.system('ansible-playbook ./ams.yml -i /etc/ansible/hosts')
+    os.chdir("/home/ams_automatization/")
+    os.system('ansible-playbook ams.yml -i hosts')
 
 
 
