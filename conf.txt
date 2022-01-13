@@ -1,0 +1,7 @@
+hosts:10.128.15.226
+password:123456789
+elk:yes
+prometheus:yes
+alertmanager:yes
+grafana:yes
+webpage:yes
