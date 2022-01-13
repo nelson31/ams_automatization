@@ -2,6 +2,7 @@ import ipaddress
 import sys
 import os
 import subprocess
+import ansible_runner
 
 
 ansible_required = """---
@@ -330,9 +331,10 @@ def main():
     
     #----------------------------Run ansible-------------------------------------------------------
     #subprocess.run(["ansible-playbook", "./ams.yml", "-i", "/etc/ansible/hosts"])
-    os.chdir("/home/ams_automatization/")
-    os.system('ansible-playbook ams.yml -i hosts')
+    #os.chdir("/home/ams_automatization/")
+    #os.system('ansible-playbook ams.yml -i hosts')
 
+    r = ansible_runner.run(playbook='ams.yml')
 
 
 
