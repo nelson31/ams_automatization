@@ -322,6 +322,16 @@ def main():
     if(installer_configs['prometheus'] or installer_configs['alertmanager'] or installer_configs['graphana']):
       compose_file.write(compose_networks)
 
+    #----------------------------Write hosts file-------------------------------------------------
+
+    hosts_file = open("/etc/ansible/hosts", "w")
+
+    hosts_file.write(installer_configs['hosts'])
+
+    
+    #----------------------------Run ansible-------------------------------------------------------
+    subprocess.run(["ansible-playbook", "./ams.yml"])
+
 
 
 
@@ -398,11 +408,6 @@ def parse_line(line):
     else:
       print("Error parsing line \"" + line + "\"")
       sys.exit()
-
-
-    subprocess.run(["ansible-playbook", "ams.yml", "-i", installer_configs['password']])
-
-
 
 
     
