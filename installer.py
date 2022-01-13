@@ -245,7 +245,11 @@ installer_configs = {
 def main():
 
     #----------------------------Read config file---------------------------------------
-    config_file = open(os.path.join(os.path.dirname(__file__),'conf.txt'), "r")
+    try:
+      config_file = open(os.path.join(os.path.dirname(__file__),'conf.txt'), "r")
+    except OSError:
+      print("Could not open configuration file to read.")
+      sys.exit()
 
     for line in config_file:
         parse_line(line.strip("\n"))
