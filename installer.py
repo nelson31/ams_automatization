@@ -329,7 +329,7 @@ def main():
 
     
     #----------------------------Run ansible-------------------------------------------------------
-    subprocess.run(["ansible-playbook", "./ams.yml"])
+    subprocess.run(["ansible-playbook", "./ams.yml", "-i", "/etc/ansible/hosts"])
 
 
 
