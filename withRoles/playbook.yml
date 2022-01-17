@@ -23,14 +23,6 @@
   tags: 
     - grafana
 
-- name: Alertmanager install and configure
-  hosts: vm 
-  become: yes
-  roles:
-    - alertmanager
-  tags: 
-    - alertmanager
-
 - name: Prometheus install and configure
   hosts: vm 
   become: yes
@@ -38,6 +30,14 @@
     - prometheus
   tags: 
     - prometheus
+
+- name: Alertmanager install and configure
+  hosts: vm 
+  become: yes
+  roles:
+    - alertmanager
+  tags: 
+    - alertmanager
 
 - name: AMSWebApp install and configure
   hosts: vm 
