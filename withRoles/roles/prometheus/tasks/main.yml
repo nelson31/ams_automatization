@@ -2,13 +2,13 @@
 - name: Copy Prometheus config files
   template:
     src: prometheus
-    dest: {{ docker_compose_dir }}
+    dest: "{{ docker_compose_dir }}"
     mode: 0666
 
 - name: Copy compose source templates
   template:
     src: docker-compose.yml
-    dest: {{ docker_compose_dir }}
+    dest: "{{ docker_compose_dir }}"
     mode: 0666
 
 - name: Build container with docker-compose
