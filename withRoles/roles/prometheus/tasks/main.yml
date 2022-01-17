@@ -11,8 +11,8 @@
     mode: 0666
 
 - name: Copy alert config file
-  template:
-    src: alert.yml
+  copy:
+    src: './roles/prometheus/templates/alert.yml'
     dest: "{{ docker_compose_dir }}/prometheus"
     mode: 0666
 
