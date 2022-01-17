@@ -1,19 +1,19 @@
 ---
 - name: create the directory prometheus
   file:
-    path: "{{ docker_compose_dir }}"/prometheus
+    path: "{{ docker_compose_dir }}/prometheus"
     state: directory
 
 - name: Copy prometheus config file
   template:
     src: prometheus.yml
-    dest: "{{ docker_compose_dir }}"/prometheus
+    dest: "{{ docker_compose_dir }}/prometheus"
     mode: 0666
 
 - name: Copy alert config file
   template:
     src: alert.yml
-    dest: "{{ docker_compose_dir }}"/prometheus
+    dest: "{{ docker_compose_dir }}/prometheus"
     mode: 0666
 
 - name: Copy compose source templates
