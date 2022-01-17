@@ -1,0 +1,77 @@
+---
+- name: Copy ELK config files
+  template:
+    src: configs
+    dest: {{ docker_compose_dir }}
+    mode: 0666
+
+- name: Copy compose source templates
+  template:
+    src: docker-compose.yml
+    dest: {{ docker_compose_dir }}
+    mode: 0666
+
+- name: Build container with docker-compose
+  become: yes
+  docker_compose:
+    project_src: "{{ docker_compose_dir }}"
+  register: options
+
+- debug: msg={{ options }}
+
+- name: Sleep for 10 seconds
+  wait_for:
+    timeout: 10
+
+- name: change elastic bootstrap password
+  command: docker exec -it home_elk_1 bash -c 'echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x'
+        
+- name: Change ownership of elasticsearch.keystore
+  community.docker.docker_container_exec:
+    container: home_elk_1
+    command: chmod a+wr /etc/elasticsearch/elasticsearch.keystore    
+    
+- name: restart elasticsearch
+  community.docker.docker_container_exec:
+    container: home_elk_1
+    command: service elasticsearch restart
+        
+- name: wait for elastisearch to be up
+  wait_for_connection:
+    delay: 30
+    sleep: 1     
+        
+- name: change elastic user password
+  command:
+    argv:
+      - docker
+      - exec
+      - -it
+      - home_elk_1
+      - bash
+      - -c 
+      - |
+        curl -uelastic:"123456789" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ "password":"123456789" }'
+          
+- name: change kibana_system user password
+  command:
+    argv:
+      - docker
+      - exec
+      - -it
+      - home_elk_1
+      - bash
+      - -c 
+      - |
+        curl -uelastic:"123456789" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/kibana_system/_password/' -d '{ "password":"123456789" }'
+    
+- name: restart elasticsearch
+  community.docker.docker_container_exec:
+    container: home_elk_1
+    command: service elasticsearch restart
+        
+- name: restart kibana
+  community.docker.docker_container_exec:
+    container: home_elk_1
+    command: service kibana restart
+   
