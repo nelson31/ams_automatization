@@ -52,12 +52,17 @@
 - name: Change ownership of elasticsearch.keystore
   community.docker.docker_container_exec:
     container: home_elk_1
-    command: chmod a+wr /etc/elasticsearch/elasticsearch.keystore    
+    command: chmod a+rw /etc/elasticsearch/elasticsearch.keystore    
 
 - name: restart elasticsearch
   community.docker.docker_container_exec:
     container: home_elk_1
     command: service elasticsearch restart
+
+- name: wait for elastisearch to be up
+  wait_for_connection:
+    delay: 30
+    sleep: 1     
 
 - name: change elastic user password
   command:
