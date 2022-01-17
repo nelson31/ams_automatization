@@ -1,6 +1,6 @@
 global:
         resolve_timeout: 1m
-        slack_api_url: {{ hooks_slack }}
+        slack_api_url: 'https://hooks.slack.com/services/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'
 
 route:
         receiver: 'slack-notifications'
@@ -8,7 +8,7 @@ route:
 receivers:
 - name: 'slack-notifications'
   slack_configs:
-  - channel: {{ channel_name }}
+  - channel: '#alertmanager'
     send_resolved: true
     icon_url: https://avatars3.githubusercontent.com/u/3380462
     title: |-
