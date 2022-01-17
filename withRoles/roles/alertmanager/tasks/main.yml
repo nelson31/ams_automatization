@@ -5,8 +5,8 @@
     state: directory
 
 - name: Copy alertmanager config file
-  copy:
-    src: './roles/alertmanager/templates/alertmanager.yml'
+  template:
+    src: alertmanager.yml
     dest: "{{ docker_compose_dir }}/alertmanager"
     mode: 0666
 
