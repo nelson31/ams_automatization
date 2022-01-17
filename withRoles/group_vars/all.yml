@@ -20,5 +20,5 @@ hooks_slack: 'https://hooks.slack.com/services/T02K1LY56GN/B02Q1KU96LC/9R1296Y5B
 channel_name: '#alertmanager'
 
 #Pass do elasticsearch
-pass_elasticsearch: \"123456789\"
+pass_elasticsearch: "123456789"
 
