@@ -1,8 +1,31 @@
 ---
-- name: Copy ELK config files
+- name: create the directory configs
+  file:
+    path: "{{ docker_compose_dir }}"/configs
+    state: directory
+
+- name: Copy 02-beats-input config file
   template:
-    src: configs
-    dest: "{{ docker_compose_dir }}"
+    src: 02-beats-input.conf
+    dest: "{{ docker_compose_dir }}"/configs
+    mode: 0666
+
+- name: Copy 30-output config file
+  template:
+    src: 30-output.conf
+    dest: "{{ docker_compose_dir }}"/configs
+    mode: 0666
+
+- name: Copy elasticsearch config file
+  template:
+    src: elasticsearch.yml
+    dest: "{{ docker_compose_dir }}"/configs
+    mode: 0666
+
+- name: Copy kibana config file
+  template:
+    src: kibana.yml
+    dest: "{{ docker_compose_dir }}"/configs
     mode: 0666
 
 - name: Copy compose source templates

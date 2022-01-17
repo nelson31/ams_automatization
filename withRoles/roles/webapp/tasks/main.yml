@@ -3,11 +3,19 @@
   apt:
     name: mini-httpd
 
-- name: Copy modules config file
+- name: Ensure directory structure exists
+  file:
+    state: directory
+    dest: '~/{{ item.path }}'
+  with_filetree: '../templates'
+  when: item.state == 'directory'
+
+- name: Ensure files are populated from templates
   template:
-    src: AMSWebPlatform
-    dest: /home
-    mode: 0666
+    src: '{{ item.src }}'
+    dest: '~/{{ item.path }}'
+  with_filetree: '../templates'
+  when: item.state == 'file'
 
 - name: Inicialize Web platform
   command: sudo mini_httpd -p 80 -d /home/AMSWebPlatform
