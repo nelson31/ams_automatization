@@ -47,7 +47,7 @@
     timeout: 10
 
 - name: change elastic bootstrap password
-  command: docker exec -it home_elk_1 bash -c 'echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x'
+  command: docker exec -it home_elk_1 bash -c 'echo "{{ pass_elasticsearch }}" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x'
 
 - name: Change ownership of elasticsearch.keystore
   community.docker.docker_container_exec:
@@ -75,8 +75,7 @@
       - home_elk_1
       - bash
       - -c 
-      - |
-        curl -uelastic:"123456789" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ "password":"123456789" }'
+      - "curl -uelastic:\"123456789\" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ \"password\":\"123456789\" }'"
 
 - name: change kibana_system user password
   command:
