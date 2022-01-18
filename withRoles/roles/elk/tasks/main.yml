@@ -75,7 +75,7 @@
       - home_elk_1
       - bash
       - -c 
-      - "curl -uelastic:\"123456789\" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ \"password\":\"123456789\" }'"
+      - "curl -uelastic:\"{{ pass_elasticsearch }}\" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ \"password\":\"{{ pass_elasticsearch }}\" }'"
 
 - name: change kibana_system user password
   command:
@@ -87,7 +87,7 @@
       - bash
       - -c 
       - |
-        curl -uelastic:"123456789" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/kibana_system/_password/' -d '{ "password":"123456789" }'
+        curl -uelastic:"{{ pass_elasticsearch }}" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/kibana_system/_password/' -d '{ "password":"{{ pass_elasticsearch }}" }'
 
 - name: restart elasticsearch
   community.docker.docker_container_exec:
