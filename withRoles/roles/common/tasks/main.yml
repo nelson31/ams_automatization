@@ -29,3 +29,6 @@
         
 - name: Change VM.max_map_count
   command: sudo sysctl -w vm.max_map_count=262144
+
+- name: Force ubuntu to see updated VM.max_map_count
+  command: sudo sysctl -p
