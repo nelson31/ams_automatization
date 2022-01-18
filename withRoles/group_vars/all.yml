@@ -6,9 +6,6 @@ common_member_of: sudo
 #docker_compose
 docker_compose_dir: /home
 
-#IP da VM
-ip_vm: 35.223.48.204
-
 #kube-state-metrics
 ip_kube_state_metrics: ['10.8.0.5:8080']
 
