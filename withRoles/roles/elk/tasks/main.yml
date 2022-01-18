@@ -63,7 +63,7 @@
 
 - name: wait for elastisearch to be up
   wait_for_connection:
-    delay: 30
+    delay: 100
     sleep: 1     
 
 - name: change elastic user password
