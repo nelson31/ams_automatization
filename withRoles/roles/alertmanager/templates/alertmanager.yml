@@ -12,7 +12,7 @@ receivers:
     send_resolved: true
     icon_url: https://avatars3.githubusercontent.com/u/3380462
     title: |-
-     [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
+     ["{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
      {{- if gt (len .CommonLabels) (len .GroupLabels) -}}
        {{" "}}(
        {{- with .CommonLabels.Remove .GroupLabels.Names }}
@@ -22,9 +22,9 @@ receivers:
          {{- end }}
        {{- end -}}
        )
-     {{- end }}
+     {{- end }}"
     text: >-
-     {{ range .Alerts -}}
+     "{{ range .Alerts -}}
      *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
 
      *Description:* {{ .Annotations.description }}
@@ -32,4 +32,4 @@ receivers:
      *Details:*
        {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
        {{ end }}
-     {{ end }}
+     {{ end }}"
