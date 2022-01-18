@@ -75,7 +75,8 @@
       - home_elk_1
       - bash
       - -c 
-      - "curl -uelastic:\"{{ pass_elasticsearch }}\" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ \"password\":\"{{ pass_elasticsearch }}\" }'"
+      - |
+        curl -uelastic:"{{ pass_elasticsearch }}" -XPUT -H 'Content-Type: application/json' 'http://localhost:9200/_xpack/security/user/elastic/_password/' -d '{ "password":"{{ pass_elasticsearch }}" }'
 
 - name: change kibana_system user password
   command:
