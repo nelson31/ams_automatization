@@ -13,7 +13,7 @@ ip_kube_state_metrics: ['10.8.0.5:8080']
 ips_node_exporter: ['10.8.0.2:9100','10.8.1.2:9100','10.8.2.2:9100']
 
 #Hooks slack
-hooks_slack: 'https://hooks.slack.com/services/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'
+hooks_slack: 'https://hooks.slack.com/services/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'
 
 #Channel name
 channel_name: '#alertmanager'
