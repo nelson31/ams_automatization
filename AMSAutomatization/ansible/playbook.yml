@@ -1,0 +1,48 @@
+---
+- name: Base VM configuration
+  hosts: vm
+  become: yes
+  roles:
+    - common
+  tags: 
+    - common
+
+- name: ELK install and configure
+  hosts: vm 
+  become: yes
+  roles:
+    - elk
+  tags: 
+    - elk
+
+- name: Grafana install and configure
+  hosts: vm 
+  become: yes
+  roles:
+    - grafana
+  tags: 
+    - grafana
+
+- name: Prometheus install and configure
+  hosts: vm 
+  become: yes
+  roles:
+    - prometheus
+  tags: 
+    - prometheus
+
+- name: Alertmanager install and configure
+  hosts: vm 
+  become: yes
+  roles:
+    - alertmanager
+  tags: 
+    - alertmanager
+
+- name: AMSWebApp install and configure
+  hosts: vm 
+  become: yes
+  roles:
+    - webapp
+  tags: 
+    - webapp

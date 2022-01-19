@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+        grafana:
+                image: grafana/grafana-oss:latest
+                ports:
+                        - "3000:3000"
+                user: '104'
+                networks:
+                        - prometheus-grafana
+
+networks:
+        prometheus-grafana:
+                driver: bridge

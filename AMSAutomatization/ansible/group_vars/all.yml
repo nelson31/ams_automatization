@@ -1,0 +1,23 @@
+---
+#provisioning
+common_shell: /bin/bash
+common_member_of: sudo
+
+#docker_compose
+docker_compose_dir: /home
+
+#kube-state-metrics
+ip_kube_state_metrics: ['10.8.0.5:8080']
+
+#node-exporter
+ips_node_exporter: ['10.8.0.2:9100','10.8.1.2:9100','10.8.2.2:9100']
+
+#Hooks slack
+hooks_slack: 'https://hooks.slack.com/services/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'
+
+#Channel name
+channel_name: '#alertmanager'
+
+#Pass do elasticsearch
+pass_elasticsearch: "123456789"
+

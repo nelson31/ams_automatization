@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+        prometheus:
+                image: prom/prometheus:latest
+                command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+                ports:
+                        - "9090:9090"
+                volumes:
+                        - ./prometheus:/etc/prometheus
+                        - prometheus-data:/prometheus
+                networks:
+                        - prometheus-grafana
+
+
+volumes:
+        prometheus-data:
+
+networks:
+        prometheus-grafana:
+                driver: bridge

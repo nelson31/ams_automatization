@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+        alertmanager:
+                image: prom/alertmanager:latest
+                restart: unless-stopped
+                command: --config.file=/config/alertmanager.yml --log.level=debug
+                ports:
+                        - "9093:9093"
+                volumes:
+                        - ./alertmanager:/config
+                        - alertmanager-data:/data
+                networks:
+                        - prometheus-grafana
+
+
+volumes:
+        alertmanager-data:
+
+networks:
+        prometheus-grafana:
+                driver: bridge
