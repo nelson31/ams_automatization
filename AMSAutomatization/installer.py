@@ -23,7 +23,14 @@ http_port = 80
 
 
 
-
+'''
+Funcao usada para proceder ao tratamento das operacoes relativas ao path /
+'''
+@app.route('/', methods=['GET','POST'])
+def home():
+	
+	
+	return render_template("home.html", files=file_list)
 
 
 
