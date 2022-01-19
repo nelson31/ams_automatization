@@ -43,7 +43,7 @@ body {
 
 .ex3 .hide3 {
   width: 50%;
-  display: block;
+  display: none;
   height: 0; /* any arbitrary height but best at the minimum initial height you would want. */
   opacity: 0;
   transition: all 0.5s ease;
