@@ -9,8 +9,7 @@ Desenvolvido por: Grupo 3 da Accenture
 
 import os, sys, datetime, logging
 import requests
-import jwt, json, socket
-from werkzeug.utils import secure_filename
+import json, socket
 from flask import Flask, request, url_for, redirect, render_template, make_response, send_from_directory, current_app
 from dotenv import load_dotenv
 
