@@ -7,7 +7,7 @@ Projeto de Informática 2021/22
 Desenvolvido por: Grupo 3 da Accenture
 """
 
-import os, sys, datetime, logging
+import os, sys, datetime
 import requests
 import json, socket
 from flask import Flask, request, url_for, redirect, render_template, make_response, send_from_directory, current_app
@@ -35,17 +35,6 @@ def home():
 
 
 if __name__ == '__main__':
-
-	# configuracao de log
-	logging.basicConfig(filename=logname,
-							filemode='a',
-							format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-							datefmt='%H:%M:%S',
-							level=logging.DEBUG)
-
-	logging.info("Running HTTP Server")
-	logger = logging.getLogger()
-	# fim configuracao de log
 
 	app.run(host='0.0.0.0', port=http_port, debug=True)
 
