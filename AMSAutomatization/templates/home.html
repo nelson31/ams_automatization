@@ -1,62 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: rgb(0, 72, 114)">
+
 <head>
 	<title>AMS Automatization</title>
-	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
+	<link rel="stylesheet" href="../static/style.css" type="text/css" />
 </head>
-<body>
+
+<body style="background-color: rgb(0, 72, 114)">
 	<div style="background-color: rgb(0, 72, 114); text-align: center; font-size: 2em;">
 		<h1 style="color: white">AMS Automatization</h1>
 	</div>
-	<div style="background-color: rgb(0, 72, 114); text-align: left; font-size: 2em;">
-		<label for="webapp" class="container" style="text-align: center; padding-bottom: 30px; color: rgb(161, 142, 142); font-size: 1em;"> 
-			Select the tools to be installed
-		</label><br>
-		<div style="padding-top: 20px; padding-bottom: 50px; padding-left: 15%;">
-			<form action="/install" method="post">
-				<div class="ex3">
-					<label for="webapp" class="container" style="color: white"> Web App </label>
-					<input id="webapp" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
-				</div>
-				<br>
-				<div class="ex3">
-					<label for="elk" class="container" style="color: white"> ELK </label>
-					<input id="elk" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
-					<div class="hide3">
-						<label for="password" class="inputlabel"> Password
-						<input type="text" id="password" name="password" size="25" class="inputtext">	
-					</div>
-				</div>
-				<br>
-				<div class="ex3">
-					<label for="prometheus" class="container" style="color: white"> Prometheus </label>
-					<input id="prometheus" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
-				</div>
-				<br>
-				<div class="ex3">
-					<label for="alertmanager" class="container" style="color: white"> Alert Manager </label>
-					<input id="alertmanager" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
-					<div class="hide3">
-							<label for="url" class="inputlabel"> WebWook URL
-							<input type="text" id="url" name="url" size="25" class="inputtext">
-							<br>
-							<label for="channel" class="inputlabel"> Channel Name
-							<input type="text" id="channel" name="channel" size="25" class="inputtext">
-					</div>
-				</div>
-				<br>
-				<div class="ex3">
-					<label for="graphana" class="container" style="color: white"> Graphana </label>
-					<input id="graphana" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
-				</div>
-				<br>
-			</form>
-		</div>
+	<div style="background-color: rgb(0, 72, 114); text-align: left; font-size: 2em; padding-bottom: 20px;">
 		<div style="text-align: center;">
-			<input type="submit" class="button buttonsh" value="Install">
+			<label for="subtitle" class="container"
+				style="text-align: center; padding-bottom: 30px; color: rgb(161, 142, 142); color: white; font-size: 1em;">
+				Select the tools to be installed
+			</label><br>
+		</div>
+		<div style="padding-top: 20px; padding-bottom: 50px;">
+			<form action="/install" method="post">
+				<div style="padding-left: 34%;">
+					<div>
+						<label for="ip_host" class="inputlabel" style="padding-left: 0px"> IP Host</label>
+						<input type="text" id="ip_host" name="ip_host" size="25" class="inputtext" />
+					</div>
+					<div class="ex3">
+						<label for="webapp" class="container" style="color: white"> Web App </label>
+						<input id="webapp" name="webapp" type="checkbox"
+							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
+					</div>
+					<div class="ex3">
+						<label for="elk" class="container" style="color: white"> ELK </label>
+						<input id="elk" name="elk" type="checkbox"
+							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
+						<div class="hide3">
+							<label for="password" class="inputlabel"> Password </label>
+							<input type="text" id="password" name="password" size="25" class="inputtext" />
+						</div>
+					</div>
+					<div class="ex3">
+						<label for="prometheus" class="container" style="color: white"> Prometheus </label>
+						<input id="prometheus" name="prometheus" type="checkbox"
+							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
+					</div>
+					<div class="ex3">
+						<label for="alertmanager" class="container" style="color: white"> Alert Manager </label>
+						<input id="alertmanager" name="alertmanager" type="checkbox"
+							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
+						<div class="hide3">
+							<label for="url" class="inputlabel"> WebWook URL</label>
+							<input type="text" id="url" name="url" size="25" class="inputtext"></label>
+							<br>
+							<label for="channel" class="inputlabel"> Channel Name</label>
+							<input type="text" id="channel" name="channel" size="25" class="inputtext" />
+						</div>
+					</div>
+					<div class="ex3">
+						<label for="grafana" class="container" style="color: white"> Grafana </label>
+						<input id="grafana" name="grafana" type="checkbox"
+							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
+					</div>
+				</div>
+				<div style="text-align: center; padding-top: 80px;">
+					<input type="submit" class="button buttonsh" value="Install" />
+				</div>
+			</form>
 		</div>
 	</div>
 
 </body>
-</html>
 
+</html>
