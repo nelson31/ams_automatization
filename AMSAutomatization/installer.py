@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 
 # IP do servidor de HTTP
-http_ip = socket.gethostbyname("http_container")
+http_ip = socket.gethostbyname()
 # Porta do servidor HTTP
 http_port = 80
 
