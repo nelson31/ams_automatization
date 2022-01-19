@@ -19,7 +19,7 @@ app = Flask(__name__)
 # IP do servidor de HTTP
 http_ip = "localhost"
 # Porta do servidor HTTP
-http_port = 80
+http_port = 8080
 
 
 
