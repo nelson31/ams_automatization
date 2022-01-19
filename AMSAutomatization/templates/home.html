@@ -14,35 +14,49 @@
 		</label><br>
 		<div style="padding-top: 20px; padding-bottom: 50px; padding-left: 15%;">
 			<form action="/install" method="post">
-				<label for="webapp" class="container" style="color: white"> WebApp
-					<input type="checkbox" id="webapp" name="webapp">
-					<span class="checkmark"></span>
-				</label><br>
-				<label for="elk" class="container" style="color: white"> ELK
-					<input type="checkbox" id="elk" name="elk">
-					<span class="checkmark"></span>
-				</label><br>
-				<label for="password" class="container" style="color: white"> Password
-
-				</label>
-				<label for="prometheus" class="container" style="color: white"> Prometheus
-					<input type="checkbox" id="prometheus" name="prometheus">
-					<span class="checkmark"></span>
-				</label><br>
-				<label for="alertmanager" class="container" style="color: white"> AlertManager
-					<input type="checkbox" id="alertmanager" name="alertmanager">
-					<span class="checkmark"></span>
-				</label><br>
-				<label for="grafana" class="container" style="color: white"> Grafana
-					<input type="checkbox" id="grafana" name="grafana">
-					<span class="checkmark"></span>
-				</label><br>
+				<div class="ex3">
+					<label for="webapp" class="container" style="color: white"> Web App </label>
+					<input id="webapp" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
+				</div>
+				<br>
+				<div class="ex3">
+					<label for="elk" class="container" style="color: white"> ELK </label>
+					<input id="elk" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
+					<div class="hide3">
+						<label for="password" class="inputlabel"> Password
+						<input type="text" id="password" name="password" size="25" class="inputtext">	
+					</div>
+				</div>
+				<br>
+				<div class="ex3">
+					<label for="prometheus" class="container" style="color: white"> Prometheus </label>
+					<input id="prometheus" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
+				</div>
+				<br>
+				<div class="ex3">
+					<label for="alertmanager" class="container" style="color: white"> Alert Manager </label>
+					<input id="alertmanager" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
+					<div class="hide3">
+							<label for="url" class="inputlabel"> WebWook URL
+							<input type="text" id="url" name="url" size="25" class="inputtext">
+							<br>
+							<label for="channel" class="inputlabel"> Channel Name
+							<input type="text" id="channel" name="channel" size="25" class="inputtext">
+					</div>
+				</div>
+				<br>
+				<div class="ex3">
+					<label for="graphana" class="container" style="color: white"> Graphana </label>
+					<input id="graphana" type="checkbox" style="float: left; margin-top: 17px; width: 25px; height: 25px;">
+				</div>
+				<br>
 			</form>
 		</div>
-	<div style="text-align: center;">
-		<input type="submit" class="button buttonsh" value="Install">
+		<div style="text-align: center;">
+			<input type="submit" class="button buttonsh" value="Install">
+		</div>
 	</div>
-	</div>
+
 </body>
 </html>
 
