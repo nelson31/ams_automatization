@@ -30,7 +30,7 @@ Funcao usada para proceder ao tratamento das operacoes relativas ao path /
 def home():
 	
 	
-	return render_template("home.html", files=file_list)
+	return render_template("home.html")
 
 
 
