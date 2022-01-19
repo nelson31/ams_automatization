@@ -11,7 +11,7 @@ import os, sys, datetime
 import requests
 import json, socket
 from flask import Flask, request, url_for, redirect, render_template, make_response, send_from_directory, current_app
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 app = Flask(__name__)
 

@@ -5,8 +5,43 @@
 	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
 </head>
 <body>
-	<div style="background-color: #082767; text-align: center; font-size: 2em;">
+	<div style="background-color: rgb(0, 72, 114); text-align: center; font-size: 2em;">
 		<h1 style="color: white">AMS Automatization</h1>
+	</div>
+	<div style="background-color: rgb(0, 72, 114); text-align: left; font-size: 2em;">
+		<label for="webapp" class="container" style="text-align: center; padding-bottom: 30px; color: rgb(161, 142, 142); font-size: 1em;"> 
+			Select the tools to be installed
+		</label><br>
+		<div style="padding-top: 20px; padding-bottom: 50px; padding-left: 15%;">
+			<form action="/install" method="post">
+				<label for="webapp" class="container" style="color: white"> WebApp
+					<input type="checkbox" id="webapp" name="webapp">
+					<span class="checkmark"></span>
+				</label><br>
+				<label for="elk" class="container" style="color: white"> ELK
+					<input type="checkbox" id="elk" name="elk">
+					<span class="checkmark"></span>
+				</label><br>
+				<label for="password" class="container" style="color: white"> Password
+
+				</label>
+				<label for="prometheus" class="container" style="color: white"> Prometheus
+					<input type="checkbox" id="prometheus" name="prometheus">
+					<span class="checkmark"></span>
+				</label><br>
+				<label for="alertmanager" class="container" style="color: white"> AlertManager
+					<input type="checkbox" id="alertmanager" name="alertmanager">
+					<span class="checkmark"></span>
+				</label><br>
+				<label for="grafana" class="container" style="color: white"> Grafana
+					<input type="checkbox" id="grafana" name="grafana">
+					<span class="checkmark"></span>
+				</label><br>
+			</form>
+		</div>
+	<div style="text-align: center;">
+		<input type="submit" class="button buttonsh" value="Install">
+	</div>
 	</div>
 </body>
 </html>

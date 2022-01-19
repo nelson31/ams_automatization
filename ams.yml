@@ -34,31 +34,32 @@
         
     - name: Change VM.max_map_count
       command: sudo sysctl -w vm.max_map_count=262144
-        
+
     - name: Copy docker-compose file
       copy:
         src: './templates/docker-compose.yml'
         dest: '/home/'
         mode: 0666
-        
-    - name: Copy alertmanager config file
-      copy:
-        src: './templates/alertmanager/'
-        dest: '/home/alertmanager/'
-        mode: 0666
-        
-    - name: Copy prometheus config file
-      copy:
-        src: './templates/prometheus/'
-        dest: '/home/prometheus/'
-        mode: 0666
-    
+
     - name: Copy ELK config files
       copy:
         src: './templates/configs/'
         dest: '/home/configs/'
         mode: 0666
-        
+
+    - name: Copy prometheus config file
+      copy:
+        src: './templates/prometheus/'
+        dest: '/home/prometheus/'
+        mode: 0666
+
+    - name: Copy alertmanager config file
+      copy:
+        src: './templates/alertmanager/'
+        dest: '/home/alertmanager/'
+        mode: 0666
+
+
     - name: build container with docker-compose
       community.docker.docker_compose:
         project_src: "/home/"
@@ -67,8 +68,8 @@
     - name: Sleep for 10 seconds
       wait_for:
         timeout: 10
-      
-     
+
+
     - name: change elastic bootstrap password
       command: docker exec -it home_elk_1 bash -c 'echo "123456789" | /opt/elasticsearch/bin/elasticsearch-keystore add "bootstrap.password" -x'
         
@@ -120,7 +121,8 @@
       community.docker.docker_container_exec:
         container: home_elk_1
         command: service kibana restart
-   
+
+
     - name: Install mini-httpd
       apt:
         name: mini-httpd
@@ -133,4 +135,3 @@
 
     - name: Inicialize Web platform
       command: sudo mini_httpd -p 80 -d /home/AMSWebPlatform
-       
