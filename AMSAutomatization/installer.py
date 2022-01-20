@@ -143,13 +143,11 @@ def install():
 	hosts_file.close()
 
 	# criar comando ansible
-
-	subprocess.run("cat ansible/playbook.yml")
 	
-	#ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
-	#commandAnsible = "cd ansible && sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
-	#print(commandAnsible)
-	#subprocess.run(commandAnsible)
+	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
+	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
+	print(commandAnsible)
+	subprocess.run(commandAnsible, shell=True)
 
 	return render_template("install.html")
 
