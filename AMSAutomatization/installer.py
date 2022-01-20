@@ -135,7 +135,7 @@ def install():
 
 	hostvar = "[vm]\n" + ip_host +"\n\n"
 
-	hosts_file = open(os.path.join(os.path.dirname(__file__),"ansible\\hosts.inv"), "w")
+	hosts_file = open(os.path.join(os.path.dirname(__file__),"ansible/hosts.inv"), "w")
 
 	hosts_file.write(hostvar)
 
