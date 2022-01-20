@@ -148,7 +148,16 @@ def install():
 	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\" -i ansible/hosts.inv"
 	print(commandAnsible)
 	subprocess.run(commandAnsible, shell=True)
+	
+	logsvars = logsvars.replace(password, "secret")
+	logsvars = logsvars.replace(url, "secret")
+	
+	yml_file = open(path, "w")
 
+	yml_file.write(logsvars)
+
+	yml_file.close()
+	
 	return render_template("install.html")
 
 
