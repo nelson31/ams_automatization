@@ -147,7 +147,7 @@ def install():
 	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
 	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\" -i ansible/hosts.inv"
 	print(commandAnsible)
-	subprocess.run(commandAnsible, shell=True)
+	subprocess.Popen(commandAnsible, shell=True)
 	
 	logsvars = logsvars.replace(password, "secret")
 	logsvars = logsvars.replace(url, "secret")
