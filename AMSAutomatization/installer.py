@@ -144,10 +144,12 @@ def install():
 
 	# criar comando ansible
 
-	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
-	commandAnsible = "cd ansible && sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
-	print(commandAnsible)
-	subprocess.run(commandAnsible)
+	subprocess.run("ls")
+	
+	#ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
+	#commandAnsible = "cd ansible && sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
+	#print(commandAnsible)
+	#subprocess.run(commandAnsible)
 
 	return render_template("install.html")
 
