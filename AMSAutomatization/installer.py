@@ -21,8 +21,7 @@ http_ip = "localhost"
 # Porta do servidor HTTP
 http_port = 8080
 
-vars = """
----
+varslog = """---
 #provisioning
 common_shell: /bin/bash
 common_member_of: sudo
@@ -40,7 +39,7 @@ ips_node_exporter: ['10.8.0.2:9100','10.8.1.2:9100','10.8.2.2:9100']
 hooks_slack: 'url'
 
 #Channel name
-channel_name: 'channel_name'
+channel_name: 'name_channel'
 
 #Pass do elasticsearch
 pass_elasticsearch: "password"
@@ -59,50 +58,94 @@ def home():
 @app.route('/install', methods=['GET','POST'])
 def install():
 	
+	# obter ip do host
 	ip_host = request.form['ip_host']
 	print(ip_host)
+
+	tagsOn = "common"
+	
+	# obter selecao webapp
 	webapp = request.form.get('webapp')
 	if(webapp):
 		print("webapp: on")
+		tagsOn = tagsOn + ",webapp"
 	else: print("webapp: off")
 	
+	# obter selecao elk
 	elk = request.form.get('elk')
+	password = ""
 	if(elk):
 		print("elk: on")
 		password = request.form.get('password')
 		print(password)
+		tagsOn = tagsOn + ",elk"
 	else: print("elk: off")
 	
+	# obter selecao prometheus
 	prometheus = request.form.get('prometheus')
 	if(prometheus):
 		print("prometheus: on")
+		tagsOn = tagsOn + ",prometheus"
 	else: print("prometheus: off")
 	
+	# obter selecao alertmanager
 	alertmanager = request.form.get('alertmanager')
+	url = ""
+	channel = ""
 	if(alertmanager):
 		url = request.form.get('url')
 		channel = request.form.get('channel')
 		print(url)
 		print(channel)
 		print("alertmanager: on")
+		if("prometheus" not in tagsOn):
+			tagsOn = tagsOn + ",prometheus"
+		tagsOn = tagsOn + ",alertmanager"
 	else: print("alertmanager: off")
 	
+	# obter selecao grafana
 	grafana = request.form.get('grafana')
 	if(grafana):
 		print("grafana: on")
+		if(",prometheus" not in tagsOn):
+			tagsOn = tagsOn + ",prometheus"
+		tagsOn = tagsOn + ",grafana"
 	else: print("grafana: off")
 
-	yml_file = open(os.path.join(os.path.dirname(__file__),'group_vars\\all.yml'), "w")
+	# path para o ficheiro var_logs
+	path = os.path.join(os.path.dirname(__file__),"ansible\\group_vars\\all.yml")
 
-	vars.replace("password", password)
-	vars.replace("ip_host", ip_host)
-	vars.replace("channel", channel)
-	vars.replace("url", url)
+	print(path)
 
-	yml_file.write(vars)
-
-
+	# subtituir variaveis de input
+	logsvars = varslog.replace("password", password)
+	logsvars = logsvars.replace("name_channel", channel)
+	logsvars = logsvars.replace("url", url)
 	
+	print(logsvars)
+
+	# criar ficheiro de logs
+	yml_file = open(path, "w")
+
+	yml_file.write(logsvars)
+
+	yml_file.close()
+
+	# criar ficheiro hosts
+
+	hostvar = "[vm]\n" + ip_host +"\n\n"
+
+	hosts_file = open(os.path.join(os.path.dirname(__file__),"ansible\\hosts.inv"), "w")
+
+	hosts_file.write(hostvar)
+
+	hosts_file.close()
+
+	# criar comando ansible
+
+	commandAnsible = "sudo ansible-playbook playbook.yml -b -K --tags \"" + tagsOn + "\""
+	print(commandAnsible)
+
 	return render_template("install.html")
 
 
