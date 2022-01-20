@@ -72,6 +72,8 @@ def install():
 		tagsOn = tagsOn + ",webapp"
 	else: print("webapp: off")
 	
+	logsvars = ""
+	
 	# obter selecao elk
 	elk = request.form.get('elk')
 	password = ""
