@@ -145,7 +145,7 @@ def install():
 	# criar comando ansible
 
 	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
-	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
+	commandAnsible = "cd ansible && sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
 	print(commandAnsible)
 	subprocess.run(commandAnsible)
 
