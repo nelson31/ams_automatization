@@ -20,7 +20,7 @@ app = Flask(__name__)
 # IP do servidor de HTTP
 http_ip = "localhost"
 # Porta do servidor HTTP
-http_port = 5601
+http_port = 8080
 
 varslog = """---
 #provisioning
@@ -145,7 +145,7 @@ def install():
 	# criar comando ansible
 	
 	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
-	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\""
+	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\" -i ansible/hosts.inv"
 	print(commandAnsible)
 	subprocess.run(commandAnsible, shell=True)
 
