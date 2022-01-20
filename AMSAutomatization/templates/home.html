@@ -7,7 +7,7 @@
 	
 	<script>
 	function autocheck(){
-		var chk1 = document.getElementById("prometheus");
+		var chk1 = document.getElementById("alertmanager");
 		var chk2 = document.getElementById("grafana");
   		if( chk2.checked ) {
     			chk1.checked = true;
@@ -59,7 +59,7 @@
 					</div>
 					<div class="ex3">
 						<label for="alertmanager" class="container" style="color: white"> Alert Manager </label>
-						<input id="alertmanager" name="alertmanager" type="checkbox"
+						<input id="alertmanager" onclick="autocheck()" name="alertmanager" type="checkbox"
 							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
 						<div class="hide3">
 							<label for="url" class="inputlabel"> WebWook URL</label>
