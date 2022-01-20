@@ -79,6 +79,7 @@ def install():
 		print("elk: on")
 		password = request.form.get('password')
 		print(password)
+		logsvars = varslog.replace("password", password)
 		tagsOn = tagsOn + ",elk"
 	else: print("elk: off")
 	
@@ -101,6 +102,9 @@ def install():
 		print("alertmanager: on")
 		if("prometheus" not in tagsOn):
 			tagsOn = tagsOn + ",prometheus"
+		
+		logsvars = logsvars.replace("name_channel", channel)
+		logsvars = logsvars.replace("url", url)
 		tagsOn = tagsOn + ",alertmanager"
 	else: print("alertmanager: off")
 	
@@ -119,9 +123,6 @@ def install():
 	print(path)
 
 	# subtituir variaveis de input
-	logsvars = varslog.replace("password", password)
-	logsvars = logsvars.replace("name_channel", channel)
-	logsvars = logsvars.replace("url", url)
 	
 	print(logsvars)
 
@@ -149,8 +150,8 @@ def install():
 	print(commandAnsible)
 	subprocess.Popen(commandAnsible, shell=True)
 	
-	logsvars = logsvars.replace(password, "secret")
-	logsvars = logsvars.replace(url, "secret")
+	#logsvars = logsvars.replace(password, "secret")
+	#logsvars = logsvars.replace(url, "secret")
 	
 	yml_file = open(path, "w")
 
