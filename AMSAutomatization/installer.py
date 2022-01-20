@@ -152,8 +152,10 @@ def install():
 	print(commandAnsible)
 	subprocess.Popen(commandAnsible, shell=True)
 	
-	#logsvars = logsvars.replace(password, "secret")
-	#logsvars = logsvars.replace(url, "secret")
+	if(elk):
+		logsvars = logsvars.replace(password, "secret")
+	if(alertmanager):
+		logsvars = logsvars.replace(url, "secret")
 	
 	yml_file = open(path, "w")
 
