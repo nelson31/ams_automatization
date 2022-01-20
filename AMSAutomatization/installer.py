@@ -7,6 +7,7 @@ Projeto de Informática 2021/22
 Desenvolvido por: Grupo 3 da Accenture
 """
 
+import subprocess
 import os, sys, datetime
 #import requests
 import json, socket
@@ -143,8 +144,9 @@ def install():
 
 	# criar comando ansible
 
-	commandAnsible = "sudo ansible-playbook playbook.yml -b -K --tags \"" + tagsOn + "\""
+	commandAnsible = "sudo ansible-playbook playbook.yml --tags \"" + tagsOn + "\""
 	print(commandAnsible)
+	subprocess.run(commandAnsible)
 
 	return render_template("install.html")
 
