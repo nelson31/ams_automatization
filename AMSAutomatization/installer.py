@@ -113,7 +113,7 @@ def install():
 	else: print("grafana: off")
 
 	# path para o ficheiro var_logs
-	path = os.path.join(os.path.dirname(__file__),"ansible\\group_vars\\all.yml")
+	path = os.path.join(os.path.dirname(__file__),"ansible/group_vars/all.yml")
 
 	print(path)
 
