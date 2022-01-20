@@ -9,8 +9,8 @@
 	function autocheck(){
 		var chk1 = document.getElementById("prometheus");
 		var chk2 = document.getElementById("grafana");
-  		if( chk2.is(':checked') ) {
-    			chk1.attr('checked', true);
+  		if( chk2.checked ) {
+    			chk1.checked = true;
   		}
 	}
 	
