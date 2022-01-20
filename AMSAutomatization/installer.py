@@ -22,7 +22,19 @@ http_ip = "localhost"
 # Porta do servidor HTTP
 http_port = 8080
 
-varslog = """---
+'''
+Funcao usada para proceder ao tratamento das operacoes relativas ao path /
+'''
+@app.route('/', methods=['GET','POST'])
+def home():
+	
+	
+	return render_template("home.html")
+
+@app.route('/install', methods=['GET','POST'])
+def install():
+	
+	varslog = """---
 #provisioning
 common_shell: /bin/bash
 common_member_of: sudo
@@ -46,18 +58,6 @@ channel_name: 'name_channel'
 pass_elasticsearch: "password"
 
 """
-
-'''
-Funcao usada para proceder ao tratamento das operacoes relativas ao path /
-'''
-@app.route('/', methods=['GET','POST'])
-def home():
-	
-	
-	return render_template("home.html")
-
-@app.route('/install', methods=['GET','POST'])
-def install():
 	
 	# obter ip do host
 	ip_host = request.form['ip_host']
