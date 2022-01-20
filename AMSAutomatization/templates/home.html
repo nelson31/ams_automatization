@@ -4,19 +4,22 @@
 <head>
 	<title>AMS Automatization</title>
 	<link rel="stylesheet" href="../static/style.css" type="text/css" />
-</head>
-
-<body style="background-color: rgb(0, 72, 114)">
+	
 	<script>
-	var chk1 = document.getElementById("prometheus");
-	var chk2 = document.getElementById("grafana");
-		
-	chk1.on('click', function(){
+	function autocheck(){
+		var chk1 = document.getElementById("prometheus");
+		var chk2 = document.getElementById("grafana");
   		if( chk2.is(':checked') ) {
     			chk1.attr('checked', true);
   		}
-	});
+	}
+	
+		
+	
 	</script>
+</head>
+
+<body style="background-color: rgb(0, 72, 114)">
 	
 	<div style="background-color: rgb(0, 72, 114); text-align: center; font-size: 2em;">
 		<h1 style="color: white">AMS Automatization</h1>
@@ -68,7 +71,7 @@
 					</div>
 					<div class="ex3">
 						<label for="grafana" class="container" style="color: white"> Grafana </label>
-						<input id="grafana" name="grafana" type="checkbox"
+						<input id="grafana" onclick="autocheck()" name="grafana" type="checkbox"
 							style="float: left; margin-top: 17px; width: 25px; height: 25px;" />
 					</div>
 				</div>
