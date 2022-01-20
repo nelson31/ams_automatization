@@ -7,6 +7,17 @@
 </head>
 
 <body style="background-color: rgb(0, 72, 114)">
+	<script>
+	var chk1 = document.getElementById("prometheus");
+	var chk2 = document.getElementById("grafana");
+		
+	chk1.on('click', function(){
+  		if( chk2.is(':checked') ) {
+    			chk1.attr('checked', true);
+  		}
+	});
+	</script>
+	
 	<div style="background-color: rgb(0, 72, 114); text-align: center; font-size: 2em;">
 		<h1 style="color: white">AMS Automatization</h1>
 	</div>
