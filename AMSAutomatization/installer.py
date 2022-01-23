@@ -11,7 +11,8 @@ import subprocess
 import os, sys, datetime
 #import requests
 import json, socket
-from flask import Flask, request, url_for, redirect, render_template, make_response, send_from_directory, current_app
+from time import sleep
+from flask import Flask, request, url_for, redirect, render_template, make_response, send_from_directory, current_app, session
 #from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -22,6 +23,7 @@ http_ip = "localhost"
 # Porta do servidor HTTP
 http_port = 8080
 
+
 '''
 Funcao usada para proceder ao tratamento das operacoes relativas ao path /
 '''
@@ -31,10 +33,37 @@ def home():
 	
 	return render_template("home.html")
 
-@app.route('/install', methods=['GET','POST'])
-def install():
+@app.route('/installed', methods=['GET','POST'])
+def installing():
+
+	# criar comando ansible
 	
-	varslog = """---
+	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
+	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + session['tagsOn'] + "\" -i ansible/hosts.inv"
+	print(commandAnsible)
+	#subprocess.run(commandAnsible, shell=True)
+	
+	logvars = session['varslog']
+	if(session['elk']):
+		logvars = logvars.replace(session['password'], "secret")
+	if(session['alertmanager']):
+		logvars = logvars.replace(session['url'], "secret")
+	
+	print(logvars)
+	yml_file = open(session['path'], "w")
+
+	yml_file.write(logvars)
+
+	yml_file.close()
+
+	return render_template("installed.html")
+
+@app.route('/installing', methods=['GET','POST'])
+def install():
+
+
+	
+	template = """---
 #provisioning
 common_shell: /bin/bash
 common_member_of: sudo
@@ -43,10 +72,10 @@ common_member_of: sudo
 docker_compose_dir: /home
 
 #kube-state-metrics
-ip_kube_state_metrics: ['10.8.0.5:8080']
+ip_kube_state_metrics: ipKube
 
 #node-exporter
-ips_node_exporter: ['10.8.0.2:9100','10.8.1.2:9100','10.8.2.2:9100']
+ips_node_exporter: ipsNode
 
 #Hooks slack
 hooks_slack: 'url'
@@ -59,6 +88,8 @@ pass_elasticsearch: "password"
 
 """
 	
+	varslog = str(template)
+
 	# obter ip do host
 	ip_host = request.form['ip_host']
 	print(ip_host)
@@ -72,29 +103,50 @@ pass_elasticsearch: "password"
 		tagsOn = tagsOn + ",webapp"
 	else: print("webapp: off")
 	
-	logsvars = ""
+	#logsvars = ""
 	
 	# obter selecao elk
 	elk = request.form.get('elk')
-	password = ""
+	
 	if(elk):
 		print("elk: on")
 		password = request.form.get('password')
 		print(password)
-		logsvars = varslog.replace("password", password)
+		varslog = varslog.replace("password", password)
 		tagsOn = tagsOn + ",elk"
 	else: print("elk: off")
 	
 	# obter selecao prometheus
 	prometheus = request.form.get('prometheus')
+	kubeStateMetrics = ""
+	nodeExporter = ""
+	listNode = []
+	listNodePort = "["
 	if(prometheus):
 		print("prometheus: on")
+		kubeStateMetrics = request.form.get('kubeStateMetrics')
+		kubeStateMetrics = "['" + kubeStateMetrics + ":8080']"
+		print(kubeStateMetrics)
+		nodeExporter= request.form.get('nodeExporter')
+		print(nodeExporter)
+		listNode = nodeExporter.split(',')
+		print(listNode)
+		i = 0
+		for x in listNode:
+			if i>0:
+				listNodePort +=","
+			listNodePort += "'" + x + ":9100'"
+			i=1
+		listNodePort += "]"
+		print(listNodePort)
+
+		varslog = varslog.replace("ipKube", kubeStateMetrics)
+		varslog = varslog.replace("ipsNode", listNodePort)
 		tagsOn = tagsOn + ",prometheus"
 	else: print("prometheus: off")
 	
 	# obter selecao alertmanager
 	alertmanager = request.form.get('alertmanager')
-	url = ""
 	channel = ""
 	if(alertmanager):
 		url = request.form.get('url')
@@ -105,8 +157,8 @@ pass_elasticsearch: "password"
 		if("prometheus" not in tagsOn):
 			tagsOn = tagsOn + ",prometheus"
 		
-		logsvars = logsvars.replace("name_channel", channel)
-		logsvars = logsvars.replace("url", url)
+		varslog = varslog.replace("name_channel", channel)
+		varslog = varslog.replace("url", url)
 		tagsOn = tagsOn + ",alertmanager"
 	else: print("alertmanager: off")
 	
@@ -120,18 +172,27 @@ pass_elasticsearch: "password"
 	else: print("grafana: off")
 
 	# path para o ficheiro var_logs
-	path = os.path.join(os.path.dirname(__file__),"ansible/group_vars/all.yml")
+	path = os.path.join(os.path.dirname(__file__),"ansible\\group_vars\\all.yml")
+
+	session['path'] = path
+	session['password'] = password
+	session['url'] = url
+	session['tagsOn'] = tagsOn
+	session['elk'] = elk
+	session['alertmanager'] = alertmanager
+	session['varslog'] = varslog
+
 
 	print(path)
 
 	# subtituir variaveis de input
 	
-	print(logsvars)
+	print(varslog)
 
 	# criar ficheiro de logs
 	yml_file = open(path, "w")
 
-	yml_file.write(logsvars)
+	yml_file.write(varslog)
 
 	yml_file.close()
 
@@ -145,28 +206,12 @@ pass_elasticsearch: "password"
 
 	hosts_file.close()
 
-	# criar comando ansible
-	
-	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
-	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + tagsOn + "\" -i ansible/hosts.inv"
-	print(commandAnsible)
-	subprocess.run(commandAnsible, shell=True)
-	
-	if(elk):
-		logsvars = logsvars.replace(password, "secret")
-	if(alertmanager):
-		logsvars = logsvars.replace(url, "secret")
-	
-	yml_file = open(path, "w")
-
-	yml_file.write(logsvars)
-
-	yml_file.close()
-	
-	return render_template("install.html")
+	return render_template("installing.html")
 
 
 if __name__ == '__main__':
+
+	app.secret_key = "amsAutomatization"
 
 	app.run(host='0.0.0.0', port=http_port, debug=True)
 
