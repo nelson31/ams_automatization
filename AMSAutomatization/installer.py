@@ -45,7 +45,8 @@ def installing():
 	
 	logvars = session['varslog']
 	if(session['elk']):
-		logvars = logvars.replace(session['password'], "secret")
+		if(len(session['password'])>0):
+			logvars = logvars.replace(session['password'], "secret")
 	if(session['alertmanager']):
 		logvars = logvars.replace(session['url'], "secret")
 	
@@ -121,7 +122,7 @@ pass_elasticsearch: "password"
 	kubeStateMetrics = ""
 	nodeExporter = ""
 	listNode = []
-	listNodePort = "["
+	listNodePort = ""
 	if(prometheus):
 		print("prometheus: on")
 		kubeStateMetrics = request.form.get('kubeStateMetrics')
@@ -132,12 +133,17 @@ pass_elasticsearch: "password"
 		listNode = nodeExporter.split(',')
 		print(listNode)
 		i = 0
-		for x in listNode:
-			if i>0:
-				listNodePort +=","
-			listNodePort += "'" + x + ":9100'"
-			i=1
-		listNodePort += "]"
+		if(listNode[0] != ''):
+			listNodePort = "["
+			for x in listNode:
+				if i>0:
+					listNodePort +=","
+				listNodePort += "'" + x + ":9100'"
+				i=1
+			listNodePort += "]"
+		else: 
+			listNodePort = "[]"
+
 		print(listNodePort)
 
 		varslog = varslog.replace("ipKube", kubeStateMetrics)
