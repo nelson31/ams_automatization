@@ -33,6 +33,7 @@ def home():
 	
 	return render_template("home.html")
 
+
 @app.route('/installed', methods=['GET','POST'])
 def installing():
 
