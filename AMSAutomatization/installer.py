@@ -41,7 +41,7 @@ def installing():
 	ansiblepath = os.path.join(os.path.dirname(__file__),"ansible/playbook.yml")
 	commandAnsible = "sudo ansible-playbook " + ansiblepath + " --tags \"" + session['tagsOn'] + "\" -i ansible/hosts.inv"
 	print(commandAnsible)
-	#subprocess.run(commandAnsible, shell=True)
+	subprocess.run(commandAnsible, shell=True)
 	
 	logvars = session['varslog']
 	if(session['elk']):
