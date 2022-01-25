@@ -181,7 +181,8 @@ pass_elasticsearch: "password"
 	path = os.path.join(os.path.dirname(__file__),"ansible\\group_vars\\all.yml")
 
 	session['path'] = path
-	session['password'] = password
+	if(session['elk']):
+		session['password'] = password
 	session['url'] = url
 	session['tagsOn'] = tagsOn
 	session['elk'] = elk
