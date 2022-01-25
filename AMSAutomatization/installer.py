@@ -184,9 +184,11 @@ pass_elasticsearch: "password"
 	session['elk'] = elk
 	if(session['elk']):
 		session['password'] = password
-	session['url'] = url
-	session['tagsOn'] = tagsOn
+
 	session['alertmanager'] = alertmanager
+	if(session['alertmanager']):
+		session['url'] = url
+	session['tagsOn'] = tagsOn
 	session['varslog'] = varslog
 
 
